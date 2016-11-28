@@ -11,7 +11,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import procergs.com.aplicacaoteste.ED.PessoaED;
+import procergs.com.aplicacaoteste.ed.PessoaED;
 
 /**
  * Created by fagnersouza on 15/11/16.

@@ -2,7 +2,7 @@ package procergs.com.aplicacaoteste.helper;
 
 import android.widget.EditText;
 
-import procergs.com.aplicacaoteste.ED.PessoaED;
+import procergs.com.aplicacaoteste.ed.PessoaED;
 import procergs.com.aplicacaoteste.FormularioActivity;
 import procergs.com.aplicacaoteste.R;
 

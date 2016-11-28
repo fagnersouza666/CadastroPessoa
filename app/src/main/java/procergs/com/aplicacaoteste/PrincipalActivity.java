@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import java.util.List;
 
-import procergs.com.aplicacaoteste.ED.PessoaED;
+import procergs.com.aplicacaoteste.ed.PessoaED;
 import procergs.com.aplicacaoteste.dao.PessoaDAO;
 
 public class PrincipalActivity extends AppCompatActivity {

@@ -20,14 +20,14 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/formEndereco"
-        android:hint="Endereco"/>
+        android:id="@+id/formCep"
+        android:hint="CEP"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/formCep"
-        android:hint="CEP"/>
+        android:id="@+id/formEndereco"
+        android:hint="Endereco"/>
 
     <EditText
         android:layout_width="match_parent"
