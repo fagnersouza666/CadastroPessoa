@@ -12,8 +12,8 @@ public class EnderecoED {
     @SerializedName(value = "cep")
     private String cep;
 
-    @SerializedName(value = "lougradouro")
-    private String lougradouro;
+    @SerializedName(value = "logradouro")
+    private String rua;
 
     @SerializedName(value = "complemento")
     private String complemento;
@@ -22,10 +22,10 @@ public class EnderecoED {
     private String bairro;
 
     @SerializedName(value = "localidade")
-    private String localidade;
+    private String cidade;
 
     @SerializedName(value = "uf")
-    private String uf;
+    private String estado;
 
     @SerializedName(value = "unidade")
     private String unidade;
@@ -37,7 +37,6 @@ public class EnderecoED {
     private String gia;
 
 
-
     public String getCep() {
         return cep;
     }
@@ -46,12 +45,12 @@ public class EnderecoED {
         this.cep = cep;
     }
 
-    public String getLougradouro() {
-        return lougradouro;
+    public String getRua() {
+        return rua;
     }
 
-    public void setLougradouro(String lougradouro) {
-        this.lougradouro = lougradouro;
+    public void setRua(String rua) {
+        this.rua = rua;
     }
 
     public String getComplemento() {
@@ -70,20 +69,20 @@ public class EnderecoED {
         this.bairro = bairro;
     }
 
-    public String getLocalidade() {
-        return localidade;
+    public String getCidade() {
+        return cidade;
     }
 
-    public void setLocalidade(String localidade) {
-        this.localidade = localidade;
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
-    public String getUf() {
-        return uf;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setUf(String uf) {
-        this.uf = uf;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getUnidade() {

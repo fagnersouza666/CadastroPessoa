@@ -46,10 +46,21 @@ public class FormularioHelper {
     }
 
     public void setFormulario(PessoaED pessoa) {
-
         campoNome.setText(pessoa.getNome());
         campoEndereco.setText(pessoa.getEndereco());
         campoCep.setText(pessoa.getCep());
+        campoBairro.setText(pessoa.getBairro());
+        campoCidade.setText(pessoa.getCidade());
+        campoEstado.setText(pessoa.getEstado());
+
+        this.pessoa = pessoa;
+    }
+
+
+    //Preenche somente campos em branco
+    public void setFormularioCEP(PessoaED pessoa) {
+
+        campoEndereco.setText(pessoa.getEndereco());
         campoBairro.setText(pessoa.getBairro());
         campoCidade.setText(pessoa.getCidade());
         campoEstado.setText(pessoa.getEstado());

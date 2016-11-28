@@ -23,13 +23,15 @@ import procergs.com.aplicacaoteste.rn.PessoaRN;
 public class FormularioActivity extends AppCompatActivity {
 
     private FormularioHelper helper;
-    private String urlWS = "https://viacep.com.br/ws/90830240/json/";
     private PessoaRN pessoaRN = new PessoaRN();
+    private EditText campoCep;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
+
+        campoCep = (EditText) findViewById(R.id.formCep);
 
         helper = new FormularioHelper(this);
 
@@ -48,9 +50,6 @@ public class FormularioActivity extends AppCompatActivity {
             public void onFocusChange(View v, boolean hasFocus)
             {
                 if (!hasFocus){
-/*                    EnderecoED endereco =  pessoaRN.getEndereco("https://viacep.com.br/ws/90830240/json/");
-                    fEndereco.setText(endereco.getLougradouro());*/
-
                     chamaWebServiceCEP();
                 }
 
@@ -60,9 +59,13 @@ public class FormularioActivity extends AppCompatActivity {
 
     private void chamaWebServiceCEP(){
         try{
+            String cep = campoCep.getText().toString().replaceAll("-","");
+
+            String wsText = "https://viacep.com.br/ws/" + cep + "/json/";
+
             WebServiceThread ws = new WebServiceThread();
 
-            ws.execute(urlWS);
+            ws.execute(wsText);
 
         }
 
@@ -120,10 +123,12 @@ public class FormularioActivity extends AppCompatActivity {
             EnderecoED endereco = pessoaRN.getEndereco(s);
 
             PessoaED pessoa = new PessoaED();
-            pessoa.setEndereco(endereco.getLougradouro());
+            pessoa.setEndereco(endereco.getRua());
             pessoa.setBairro(endereco.getBairro());
-            pessoa.setCidade(endereco.getLocalidade());
-            pessoa.setEstado(endereco.getUf());
+            pessoa.setCidade(endereco.getCidade());
+            pessoa.setEstado(endereco.getEstado());
+
+            helper.setFormularioCEP(pessoa);
         }
 
         @Override

@@ -2,8 +2,10 @@ package procergs.com.aplicacaoteste.clientws;
 
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -56,18 +58,23 @@ public class WebServiceClient {
 
             URL url = new URL(urlWS);
             Log.i("get", urlWS);
-  //          HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             URLConnection urlConnection = url.openConnection();
             InputStream in = urlConnection.getInputStream();
-  //          copyInputStreamToOutputStream(in, System.out);
-   //         connection.setRequestMethod("GET");
 
-   //         connection.setRequestProperty("Accept", "application/json");
 
-      //      connection.connect();
+//            jsonDeResposta = new Scanner(in).next();
 
-            jsonDeResposta = new Scanner(in).next();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            StringBuilder result = new StringBuilder();
+            String line;
+            while((line = reader.readLine()) != null) {
+                result.append(line);
+            }
+
+            Log.i("get-", result.toString());
+
+            jsonDeResposta = result.toString();
         }
         catch(Exception e){
             e.printStackTrace();
