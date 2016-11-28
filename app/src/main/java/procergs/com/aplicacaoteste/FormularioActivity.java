@@ -20,6 +20,7 @@ import procergs.com.aplicacaoteste.helper.FormularioHelper;
 import procergs.com.aplicacaoteste.rn.PessoaRN;
 
 
+//Formulário de cadastro de pessoa
 public class FormularioActivity extends AppCompatActivity {
 
     private FormularioHelper helper;
@@ -33,16 +34,18 @@ public class FormularioActivity extends AppCompatActivity {
 
         campoCep = (EditText) findViewById(R.id.formCep);
 
+        //Helper para a partir de um PessoaED preencher os campos da tela
         helper = new FormularioHelper(this);
 
         Intent intent = getIntent();
         PessoaED pessoa = (PessoaED) intent.getSerializableExtra("pessoa");
+
+        //Se foi enviado os dados de um registro popula-lo na tela
         if (pessoa !=null) {
             helper.setFormulario(pessoa);
         }
 
-        final EditText fEndereco = (EditText) findViewById(R.id.formEndereco);
-
+        //Ao sair do campo CEP chama o webservice para popular os campos de endereço
         EditText fCEP = (EditText)findViewById(R.id.formCep);
         fCEP.setOnFocusChangeListener(new View.OnFocusChangeListener()
         {
@@ -57,6 +60,7 @@ public class FormularioActivity extends AppCompatActivity {
         });
     }
 
+    //Monta url do serviço e envia para uma nova thread
     private void chamaWebServiceCEP(){
         try{
             String cep = campoCep.getText().toString().replaceAll("-","");
@@ -65,7 +69,7 @@ public class FormularioActivity extends AppCompatActivity {
 
             WebServiceThread ws = new WebServiceThread();
 
-            ws.execute(wsText);
+            ws.execute(wsText); //Chama nova thread
 
         }
 
@@ -83,6 +87,7 @@ public class FormularioActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    //Botão no menu para salvar os dados do formulário
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -109,6 +114,7 @@ public class FormularioActivity extends AppCompatActivity {
     }
 
 
+    //Cria nova thread chama o serviço e popula os campos ao receber os dados
     private class WebServiceThread extends AsyncTask<String, Void, String> {
 
         @Override
@@ -116,6 +122,7 @@ public class FormularioActivity extends AppCompatActivity {
             super.onPreExecute();
         }
 
+        //Popula campos do formulário
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
@@ -146,9 +153,9 @@ public class FormularioActivity extends AppCompatActivity {
             super.onCancelled();
         }
 
+        //Roda em background
         @Override
         protected String doInBackground(String... urls) {
-        // params comes from the execute() call: params[0] is the url.
             try {
                 Log.i("WebServiceThread", "Thread - executa webservice.");
 
@@ -160,7 +167,7 @@ public class FormularioActivity extends AppCompatActivity {
             catch (Exception e) {
                 e.printStackTrace();
 
-                return "Unable to retrieve web page. URL may be invalid.";
+                return "Problema ao chamar o webservice.";
             }
         }
 

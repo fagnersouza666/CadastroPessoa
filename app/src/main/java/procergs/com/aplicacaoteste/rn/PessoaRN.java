@@ -18,6 +18,7 @@ public class PessoaRN {
 
     }
 
+    //Retorna um EnderecoED populado pelo json recebido
     public EnderecoED getEndereco(String jsonEndereco){
         EnderecoED enderecoRetorno = null;
 
@@ -25,9 +26,7 @@ public class PessoaRN {
             Log.i("PessoaRN-", jsonEndereco);
 
             Gson gson = new Gson();
-            enderecoRetorno = gson.fromJson(jsonEndereco, EnderecoED.class);
-
-
+            enderecoRetorno = gson.fromJson(jsonEndereco, EnderecoED.class); // converte de json para EnderecoED
 
         }
 

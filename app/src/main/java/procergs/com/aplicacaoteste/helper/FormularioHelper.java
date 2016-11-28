@@ -57,7 +57,7 @@ public class FormularioHelper {
     }
 
 
-    //Preenche somente campos em branco
+    //Preenche somente alguns campos, usado parq popular com CEP
     public void setFormularioCEP(PessoaED pessoa) {
 
         campoEndereco.setText(pessoa.getEndereco());
