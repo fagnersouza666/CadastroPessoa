@@ -64,6 +64,7 @@ public class PessoaDAO extends SQLiteOpenHelper {
             pessoa.setBairro(c.getString(c.getColumnIndex("bairro")));
             pessoa.setCidade(c.getString(c.getColumnIndex("cidade")));
             pessoa.setEstado(c.getString(c.getColumnIndex("estado")));
+            pessoa.setCep(c.getString(c.getColumnIndex("cep")));
 
             pessoas.add(pessoa);
 
