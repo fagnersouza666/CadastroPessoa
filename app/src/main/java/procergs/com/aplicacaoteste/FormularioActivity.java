@@ -1,5 +1,6 @@
 package procergs.com.aplicacaoteste;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import procergs.com.aplicacaoteste.dao.PessoaDAO;
 import procergs.com.aplicacaoteste.ed.EnderecoED;
 import procergs.com.aplicacaoteste.ed.PessoaED;
 import procergs.com.aplicacaoteste.helper.FormularioHelper;
+import procergs.com.aplicacaoteste.permissao.PermissaoUtil;
 import procergs.com.aplicacaoteste.rn.PessoaRN;
 
 
@@ -27,37 +29,51 @@ public class FormularioActivity extends AppCompatActivity {
     private PessoaRN pessoaRN = new PessoaRN();
     private EditText campoCep;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_formulario);
 
-        campoCep = (EditText) findViewById(R.id.formCep);
 
-        //Helper para a partir de um PessoaED preencher os campos da tela
-        helper = new FormularioHelper(this);
+        //Solicita permissões de internet para consultar o webservice no CEP
+        String[] permissoes = new String[]{
+                Manifest.permission.INTERNET
+        };
 
-        Intent intent = getIntent();
-        PessoaED pessoa = (PessoaED) intent.getSerializableExtra("pessoa");
+        //Se a permissão for aceita
+        if (PermissaoUtil.validade(this, 0, permissoes)){
 
-        //Se foi enviado os dados de um registro popula-lo na tela
-        if (pessoa !=null) {
-            helper.setFormulario(pessoa);
+            campoCep = (EditText) findViewById(R.id.formCep);
+
+            //Helper para a partir de um PessoaED preencher os campos da tela
+            helper = new FormularioHelper(this);
+
+            Intent intent = getIntent();
+            PessoaED pessoa = (PessoaED) intent.getSerializableExtra("pessoa");
+
+            //Se foi enviado os dados de um registro popula-lo na tela
+            if (pessoa !=null) {
+                helper.setFormulario(pessoa);
+            }
+
+            //Ao sair do campo CEP chama o webservice para popular os campos de endereço
+            EditText fCEP = (EditText)findViewById(R.id.formCep);
+            fCEP.setOnFocusChangeListener(new View.OnFocusChangeListener(){
+                @Override
+                public void onFocusChange(View v, boolean hasFocus){
+                    if (!hasFocus){
+                        chamaWebServiceCEP();
+                    }
+                }
+            });
+
         }
 
-        //Ao sair do campo CEP chama o webservice para popular os campos de endereço
-        EditText fCEP = (EditText)findViewById(R.id.formCep);
-        fCEP.setOnFocusChangeListener(new View.OnFocusChangeListener()
-        {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus)
-            {
-                if (!hasFocus){
-                    chamaWebServiceCEP();
-                }
-
-            }
-        });
+        //Se a permissão for negada
+        else{
+            Toast.makeText(FormularioActivity.this, "É preciso permitir acesso da aplicação a internet para buscar dados do seu CEP." , Toast.LENGTH_LONG).show();
+        }
     }
 
     //Monta url do serviço e envia para uma nova thread
