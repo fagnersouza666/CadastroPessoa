@@ -20,7 +20,7 @@ import procergs.com.aplicacaoteste.ed.PessoaED;
 public class PessoaDAO extends SQLiteOpenHelper {
 
     private static final String TABELA = "pessoas";
-    private static final int VERSAO = 1;
+    private static final int VERSAO = 2;
 
     public PessoaDAO(Context context) {
         super(context, PessoaDAO.TABELA, null, PessoaDAO.VERSAO);
@@ -30,7 +30,7 @@ public class PessoaDAO extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " + PessoaDAO.TABELA +
-                " (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, cep TEXT, endereco TEXT, bairro TEXT, cidade TEXT, estado TEXT);";
+                " (id INTEGER PRIMARY KEY, nome TEXT NOT NULL, cep TEXT, endereco TEXT, bairro TEXT, cidade TEXT, estado TEXT, imageblob BLOB);";
         db.execSQL(sql);
     }
 
@@ -65,6 +65,7 @@ public class PessoaDAO extends SQLiteOpenHelper {
             pessoa.setCidade(c.getString(c.getColumnIndex("cidade")));
             pessoa.setEstado(c.getString(c.getColumnIndex("estado")));
             pessoa.setCep(c.getString(c.getColumnIndex("cep")));
+            pessoa.setFoto(c.getBlob(c.getColumnIndex("imageblob")));
 
             pessoas.add(pessoa);
 
@@ -99,6 +100,7 @@ public class PessoaDAO extends SQLiteOpenHelper {
         dados.put("bairro", pessoa.getBairro());
         dados.put("cidade", pessoa.getCidade());
         dados.put("estado", pessoa.getEstado());
+        dados.put("imageblob", pessoa.getFoto());
 
         return dados;
     }

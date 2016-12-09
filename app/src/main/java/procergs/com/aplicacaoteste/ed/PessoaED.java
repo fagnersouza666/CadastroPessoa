@@ -22,6 +22,8 @@ public class PessoaED implements Serializable {
 
     private String estado;
 
+    private byte[] foto;
+
 
 
     public Long getId() {
@@ -78,6 +80,14 @@ public class PessoaED implements Serializable {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package procergs.com.aplicacaoteste.helper;
 
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import procergs.com.aplicacaoteste.ed.PessoaED;
 import procergs.com.aplicacaoteste.FormularioActivity;
@@ -18,6 +19,7 @@ public class FormularioHelper {
     EditText campoBairro;
     EditText campoCidade;
     EditText campoEstado;
+    ImageView campoFoto;
 
     private PessoaED pessoa;
 
@@ -40,6 +42,7 @@ public class FormularioHelper {
         pessoa.setBairro(campoBairro.getText().toString());
         pessoa.setCidade(campoCidade.getText().toString());
         pessoa.setEstado(campoEstado.getText().toString());
+   //     pessoa.setFoto(campoFoto.geti);
 
         return pessoa;
 

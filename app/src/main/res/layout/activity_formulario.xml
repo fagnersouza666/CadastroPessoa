@@ -47,5 +47,21 @@
         android:id="@+id/formEstado"
         android:hint="Estado"/>
 
+    <ImageView
+        android:id="@+id/formImage"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/button_image"/>
+
+    <Button
+        android:id="@+id/bTiraFoto"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="tiraFoto"
+        android:text="Tira Foto!"/>
+
 
 </LinearLayout>
